@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.example.saroshmadara.chatterpatter.R;
 import com.example.saroshmadara.chatterpatter.firebase.FirebaseArrayListAdapter;
 import com.example.saroshmadara.chatterpatter.firebase.FirebaseHandler;
 import com.example.saroshmadara.chatterpatter.models.Todo;
+import com.example.saroshmadara.chatterpatter.services.TodoService;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
@@ -49,7 +51,10 @@ public class TodoFragment extends Fragment {
         addTodoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().add(R.id.content_frame,new CreateTodoFragment());
+                Log.d("add todo clicked", "TodoFragment");
+                getActivity().getSupportFragmentManager().beginTransaction().add(R.id.content_frame, new CreateTodoFragment(), "Home").commit();
+                getActivity().onPrepareOptionsMenu(null);
+                addTodoBtn.setVisibility(View.INVISIBLE);
             }
         });
     }
@@ -67,7 +72,10 @@ public class TodoFragment extends Fragment {
 
 
 
-    private class TodoListAdapter extends FirebaseArrayListAdapter<Todo>{
+
+
+
+    public class TodoListAdapter extends FirebaseArrayListAdapter<Todo>{
 
         private TextView title,datetime,tag,desc;
         private ImageView privacy_img;
@@ -80,34 +88,10 @@ public class TodoFragment extends Fragment {
             inflater = ((Activity)context).getLayoutInflater();
         }
 
+
         @Override
         public void addEventListener() {
-            FirebaseHandler.getInstance().getUser_todos().addChildEventListener(new ChildEventListener() {
-                @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    Log.d(TAG,"onChildAdded: "+dataSnapshot.getValue());
-                }
-
-                @Override
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                }
-
-                @Override
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                }
-
-                @Override
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                }
-
-                @Override
-                public void onCancelled(FirebaseError firebaseError) {
-
-                }
-            });
+            TodoService.fetchTodo(this);
         }
 
         private void initView(View view) {

@@ -2,6 +2,7 @@ package com.example.saroshmadara.chatterpatter.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,8 +39,9 @@ public class HomeFragment extends Fragment {
         ivIcon=(ImageView)view.findViewById(R.id.frag1_icon);
         tvItemName=(TextView)view.findViewById(R.id.frag1_text);
 
-        tvItemName.setText(getArguments().getString(ITEM_NAME));
-        ivIcon.setImageDrawable(view.getResources().getDrawable(
+        tvItemName.setText(getArguments().getString(HomeFragment.ITEM_NAME));
+
+        ivIcon.setImageDrawable(ContextCompat.getDrawable(getActivity(),
                 getArguments().getInt(IMAGE_RESOURCE_ID)));
 
         return view;

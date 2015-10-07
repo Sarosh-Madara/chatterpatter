@@ -4,13 +4,52 @@
     android:layout_height="fill_parent" >
 
     <LinearLayout
+        android:id="@+id/spinnerLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="0dp"
+        >
+
+        <Spinner
+            android:id="@+id/drawerSpinner"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        >
+
+        <TextView
+            android:id="@+id/drawerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginBottom="1dp"
+            android:layout_marginTop="1dp"
+            android:background="#DADADC" ></View>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/itemLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:orientation="vertical"
-
         android:layout_marginTop="0dp"
+
         android:background="?android:attr/activatedBackgroundIndicator"
         >
 
@@ -18,7 +57,7 @@
 
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:minHeight="55dp"
+            android:minHeight="50dp"
             >
 
             <ImageView
@@ -39,14 +78,12 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginBottom="1dp"
-            android:layout_marginTop="1dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="0dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="#DADADC"
-
             ></View>
 
     </LinearLayout>
-
 </RelativeLayout>

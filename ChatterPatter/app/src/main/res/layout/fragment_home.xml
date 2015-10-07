@@ -13,7 +13,6 @@
         />
 
     <TextView
-        android:hint="abcd"
         android:layout_gravity="center|right"
         android:id="@+id/frag1_text"
         android:layout_width="wrap_content"

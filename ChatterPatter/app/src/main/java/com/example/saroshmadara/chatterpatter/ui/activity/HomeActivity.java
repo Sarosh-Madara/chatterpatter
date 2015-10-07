@@ -1,6 +1,7 @@
 package com.example.saroshmadara.chatterpatter.ui.activity;
 
 import android.content.res.Configuration;
+import android.os.AsyncTask;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,7 @@ import com.example.saroshmadara.chatterpatter.R;
 import com.example.saroshmadara.chatterpatter.models.DrawerItem;
 import com.example.saroshmadara.chatterpatter.ui.fragment.CustomDrawerAdapter;
 import com.example.saroshmadara.chatterpatter.ui.fragment.HomeFragment;
+import com.example.saroshmadara.chatterpatter.ui.fragment.TodoFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,16 +51,23 @@ public class HomeActivity extends ActionBarActivity {
 //                GravityCompat.START);
 
         // Add Drawer Item to dataList
+        dataList.add(new DrawerItem(true));
+
+        dataList.add(new DrawerItem("Connections"));
         dataList.add(new DrawerItem("Message", R.drawable.ic_action_message));
         dataList.add(new DrawerItem("Following", R.drawable.ic_action_following));
         dataList.add(new DrawerItem("Followers", R.drawable.ic_action_follower));
         dataList.add(new DrawerItem("Group Chat", R.drawable.groupchat));
-        dataList.add(new DrawerItem("Followers", R.drawable.ic_action_follower));
+
+        dataList.add(new DrawerItem("Main Options"));
+        dataList.add(new DrawerItem("Tasks", R.drawable.todo_icon));
         dataList.add(new DrawerItem("Cloud", R.drawable.ic_action_message));
         dataList.add(new DrawerItem("Camara", R.drawable.ic_action_camera));
         dataList.add(new DrawerItem("Video", R.drawable.ic_action_following));
         dataList.add(new DrawerItem("Groups", R.drawable.groupchat));
         dataList.add(new DrawerItem("Import & Export",R.drawable.ic_action_help));
+
+        dataList.add(new DrawerItem("Other Options"));
         dataList.add(new DrawerItem("About", R.drawable.ic_action_about));
         dataList.add(new DrawerItem("Settings", R.drawable.ic_action_camera));
         dataList.add(new DrawerItem("Help", R.drawable.ic_action_help));
@@ -90,9 +99,24 @@ public class HomeActivity extends ActionBarActivity {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         if (savedInstanceState == null) {
-            SelectItem(0);
+            if (dataList.get(0).isSpinner()
+                    & dataList.get(1).getTitle() != null) {
+                SelectItem(2);
+            } else if (dataList.get(0).getTitle() != null) {
+                SelectItem(1);
+            } else {
+                SelectItem(0);
+            }
         }
 
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if(menu == null){
+
+        }
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -107,20 +131,7 @@ public class HomeActivity extends ActionBarActivity {
         Fragment fragment = null;
         Bundle args = new Bundle();
         switch (possition) {
-            case 0:
-                fragment = new HomeFragment();
-                args.putString(HomeFragment.ITEM_NAME, dataList.get(possition)
-                        .getItemName());
-                args.putInt(HomeFragment.IMAGE_RESOURCE_ID, dataList.get(possition)
-                        .getImgResID());
-                break;
-            case 1:
-                fragment = new HomeFragment();
-                args.putString(HomeFragment.ITEM_NAME, dataList.get(possition)
-                        .getItemName());
-                args.putInt(HomeFragment.IMAGE_RESOURCE_ID, dataList.get(possition)
-                        .getImgResID());
-                break;
+
             case 2:
                 fragment = new HomeFragment();
                 args.putString(HomeFragment.ITEM_NAME, dataList.get(possition)
@@ -143,25 +154,14 @@ public class HomeActivity extends ActionBarActivity {
                         .getImgResID());
                 break;
             case 5:
-                fragment = new HomeFragment();
-                args.putString(HomeFragment.ITEM_NAME, dataList.get(possition)
-                        .getItemName());
-                args.putInt(HomeFragment.IMAGE_RESOURCE_ID, dataList.get(possition)
-                        .getImgResID());
-                break;
-            case 6:
-                fragment = new HomeFragment();
+                fragment = new TodoFragment();
                 args.putString(HomeFragment.ITEM_NAME, dataList.get(possition)
                         .getItemName());
                 args.putInt(HomeFragment.IMAGE_RESOURCE_ID, dataList.get(possition)
                         .getImgResID());
                 break;
             case 7:
-                fragment = new HomeFragment();
-                args.putString(HomeFragment.ITEM_NAME, dataList.get(possition)
-                        .getItemName());
-                args.putInt(HomeFragment.IMAGE_RESOURCE_ID, dataList.get(possition)
-                        .getImgResID());
+                fragment = new TodoFragment();
                 break;
             case 8:
                 fragment = new HomeFragment();
@@ -198,19 +198,46 @@ public class HomeActivity extends ActionBarActivity {
                 args.putInt(HomeFragment.IMAGE_RESOURCE_ID, dataList.get(possition)
                         .getImgResID());
                 break;
+            case 14:
+                fragment = new HomeFragment();
+                args.putString(HomeFragment.ITEM_NAME, dataList.get(possition)
+                        .getItemName());
+                args.putInt(HomeFragment.IMAGE_RESOURCE_ID, dataList.get(possition)
+                        .getImgResID());
+                break;
+            case 15:
+                fragment = new HomeFragment();
+                args.putString(HomeFragment.ITEM_NAME, dataList.get(possition)
+                        .getItemName());
+                args.putInt(HomeFragment.IMAGE_RESOURCE_ID, dataList.get(possition)
+                        .getImgResID());
+                break;
+            case 16:
+                fragment = new HomeFragment();
+                args.putString(HomeFragment.ITEM_NAME, dataList.get(possition)
+                        .getItemName());
+                args.putInt(HomeFragment.IMAGE_RESOURCE_ID, dataList.get(possition)
+                        .getImgResID());
+                break;
             default:
                 break;
         }
 
         fragment.setArguments(args);
         FragmentManager frgManager = getSupportFragmentManager();
-        frgManager.beginTransaction().replace(R.id.content_frame, fragment)
+        frgManager.beginTransaction().replace(R.id.content_frame, fragment,"Home")
                 .commit();
 
         mDrawerList.setItemChecked(possition, true);
         setTitle(dataList.get(possition).getItemName());
         mDrawerLayout.closeDrawer(mDrawerList);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        getSupportFragmentManager().popBackStack();
     }
 
     @Override
@@ -249,9 +276,29 @@ public class HomeActivity extends ActionBarActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
-            SelectItem(position);
-            Log.d("onclick","drawer Clicked");
+            if(dataList.get(position).getTitle() == null) {
+                SelectItem(position);
+                Log.d("onclick", "drawer Clicked");
+            }
 
+        }
+    }
+
+    public class LoginTask extends AsyncTask{
+
+        @Override
+        protected Object doInBackground(Object[] params) {
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            super.onPostExecute(o);
         }
     }
 }

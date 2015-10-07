@@ -11,11 +11,21 @@ import java.util.Date;
 public class Todo {
     private String title;
     private Date deadline;
-    private AlarmManager.AlarmClockInfo deadlineAlarmClockInfo;
+//    private AlarmManager.AlarmClockInfo deadlineAlarmClockInfo;
     private boolean isDone;
     private String tag;
     private String desc;
     private String privacy_id;
+
+    public Date getMakeDate() {
+        return makeDate;
+    }
+
+    public void setMakeDate(Date makeDate) {
+        this.makeDate = makeDate;
+    }
+
+    private Date makeDate;
 
     public boolean isDone() {
         return isDone;

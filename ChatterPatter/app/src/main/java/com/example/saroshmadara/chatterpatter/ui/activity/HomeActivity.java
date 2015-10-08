@@ -21,6 +21,7 @@ import com.example.saroshmadara.chatterpatter.models.DrawerItem;
 import com.example.saroshmadara.chatterpatter.ui.fragment.CustomDrawerAdapter;
 import com.example.saroshmadara.chatterpatter.ui.fragment.HomeFragment;
 import com.example.saroshmadara.chatterpatter.ui.fragment.TodoFragment;
+import com.example.saroshmadara.chatterpatter.ui.fragment.UserProfileFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +55,7 @@ public class HomeActivity extends ActionBarActivity {
         dataList.add(new DrawerItem(true));
 
         dataList.add(new DrawerItem("Connections"));
-        dataList.add(new DrawerItem("Message", R.drawable.ic_action_message));
+        dataList.add(new DrawerItem("My Profile", R.drawable.ic_action_message));
         dataList.add(new DrawerItem("Following", R.drawable.ic_action_following));
         dataList.add(new DrawerItem("Followers", R.drawable.ic_action_follower));
         dataList.add(new DrawerItem("Group Chat", R.drawable.groupchat));
@@ -133,11 +134,7 @@ public class HomeActivity extends ActionBarActivity {
         switch (possition) {
 
             case 2:
-                fragment = new HomeFragment();
-                args.putString(HomeFragment.ITEM_NAME, dataList.get(possition)
-                        .getItemName());
-                args.putInt(HomeFragment.IMAGE_RESOURCE_ID, dataList.get(possition)
-                        .getImgResID());
+                fragment = new UserProfileFragment();
                 break;
             case 3:
                 fragment = new HomeFragment();

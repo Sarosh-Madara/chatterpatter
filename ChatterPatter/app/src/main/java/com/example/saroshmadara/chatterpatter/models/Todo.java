@@ -10,43 +10,43 @@ import java.util.Date;
  */
 public class Todo {
     private String title;
-    private Date deadline;
+//    private Date deadline;
 //    private AlarmManager.AlarmClockInfo deadlineAlarmClockInfo;
-    private boolean isDone;
+//    private boolean isDone;
     private String tag;
     private String desc;
-    private String privacy_id;
+//    private String privacy_id;
 
-    public Date getMakeDate() {
-        return makeDate;
-    }
-
-    public void setMakeDate(Date makeDate) {
-        this.makeDate = makeDate;
-    }
+//    public Date getMakeDate() {
+//        return makeDate;
+//    }
+//
+//    public void setMakeDate(Date makeDate) {
+//        this.makeDate = makeDate;
+//    }
 
     private Date makeDate;
 
-    public boolean isDone() {
-        return isDone;
-    }
+//    public boolean isDone() {
+//        return isDone;
+//    }
 
-    public Date getDeadline() {
-
-        return deadline;
-    }
-
-    public void setDeadline(Date deadline) {
-        this.deadline = deadline;
-    }
-
-    public String getPrivacy_id() {
-        return privacy_id;
-    }
-
-    public void setPrivacy_id(String privacy_id) {
-        this.privacy_id = privacy_id;
-    }
+//    public Date getDeadline() {
+//
+//        return deadline;
+//    }
+//
+//    public void setDeadline(Date deadline) {
+//        this.deadline = deadline;
+//    }
+//
+//    public String getPrivacy_id() {
+//        return privacy_id;
+//    }
+//
+//    public void setPrivacy_id(String privacy_id) {
+//        this.privacy_id = privacy_id;
+//    }
 
     public String getDesc() {
         return desc;

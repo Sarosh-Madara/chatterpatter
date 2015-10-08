@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.saroshmadara.chatterpatter.firebase.FirebaseHandler;
 import com.example.saroshmadara.chatterpatter.models.Todo;
 import com.example.saroshmadara.chatterpatter.ui.fragment.TodoFragment;
+import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -21,13 +22,29 @@ public class TodoService {
     }
 
     public static void fetchTodo(final TodoFragment.TodoListAdapter todoListAdapter){
-        todoRef.addValueEventListener(new ValueEventListener() {
+
+        todoRef.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-//                Todo obj = dataSnapshot.getValue(Todo.class);
-                Log.d(dataSnapshot.getKey().toString(),dataSnapshot.getValue().toString());
-                Log.d(dataSnapshot.getChildren().toString(),String.valueOf(dataSnapshot.getChildrenCount()));
-//                todoListAdapter.add(obj);
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Todo obj = dataSnapshot.getValue(Todo.class);
+                Log.d("obj from firebase: ",obj.getDesc()+obj.getTag()+obj.getTitle());
+                todoListAdapter.add(obj);
+                Log.d("key is:"+dataSnapshot.getKey(),"value is: "+dataSnapshot.getValue());
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
             }
 
             @Override

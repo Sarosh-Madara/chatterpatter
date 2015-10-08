@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.saroshmadara.chatterpatter.R;
 import com.example.saroshmadara.chatterpatter.firebase.FirebaseArrayListAdapter;
@@ -44,6 +45,7 @@ public class TodoFragment extends Fragment {
         intiView(view);
         initListeners();
         adapter = new TodoListAdapter(getActivity(),R.layout.todo_item);
+        todoList.setAdapter(adapter);
         return view;
     }
 
@@ -105,8 +107,9 @@ public class TodoFragment extends Fragment {
         @Override
         protected void populateView(View v, Todo model) {
             initView(v);
+            Toast.makeText(getActivity(),"populateView called()",Toast.LENGTH_LONG).show();
             title.setText(model.getTitle());
-            datetime.setText(model.getDeadline().toString());
+//            datetime.setText(model.getDeadline().toString());
             tag.setText(model.getTag());
             desc.setText(model.getDesc());
         }

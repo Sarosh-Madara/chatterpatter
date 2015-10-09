@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.saroshmadara.chatterpatter.R;
 import com.example.saroshmadara.chatterpatter.models.SpinnerItem;
+import com.example.saroshmadara.chatterpatter.models.User;
 
 import java.util.List;
 

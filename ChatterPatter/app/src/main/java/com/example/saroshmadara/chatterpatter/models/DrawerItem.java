@@ -4,10 +4,25 @@ package com.example.saroshmadara.chatterpatter.models;
  * Created by Sarosh Madara on 28-09-2015.
  */
 public class DrawerItem {
-    String ItemName;
-    int imgResID;
-    String title;
-    boolean isSpinner;
+    private String ItemName;
+    private int imgResID;
+    private String title;
+    private boolean isSpinner;
+    private boolean hasUser = false;
+    private static User user;
+
+    public static User getUser() {
+        return user;
+    }
+
+    public boolean hasUser(){
+        return hasUser;
+    }
+
+    public DrawerItem(User user){
+        hasUser = true;
+        this.user = user;
+    }
 
     public boolean isSpinner() {
         return isSpinner;

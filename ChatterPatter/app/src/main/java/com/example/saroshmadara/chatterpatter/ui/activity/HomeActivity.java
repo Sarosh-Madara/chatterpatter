@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.saroshmadara.chatterpatter.ChatterPatterApp;
 import com.example.saroshmadara.chatterpatter.R;
 import com.example.saroshmadara.chatterpatter.models.DrawerItem;
 import com.example.saroshmadara.chatterpatter.ui.fragment.CustomDrawerAdapter;
@@ -52,7 +53,8 @@ public class HomeActivity extends ActionBarActivity {
 //                GravityCompat.START);
 
         // Add Drawer Item to dataList
-        dataList.add(new DrawerItem(true));
+//        if(ChatterPatterApp.getApplicationUser() != null)
+        dataList.add(new DrawerItem(ChatterPatterApp.getApplicationUser()));
 
         dataList.add(new DrawerItem("Connections"));
         dataList.add(new DrawerItem("My Profile", R.drawable.ic_action_message));
@@ -105,7 +107,10 @@ public class HomeActivity extends ActionBarActivity {
                 SelectItem(2);
             } else if (dataList.get(0).getTitle() != null) {
                 SelectItem(1);
-            } else {
+            } else if(dataList.get(0).hasUser()){
+                SelectItem(2);
+            }
+            else {
                 SelectItem(0);
             }
         }
@@ -220,7 +225,7 @@ public class HomeActivity extends ActionBarActivity {
                 break;
         }
 
-        fragment.setArguments(args);
+
         FragmentManager frgManager = getSupportFragmentManager();
         frgManager.beginTransaction().replace(R.id.content_frame, fragment,"Home")
                 .commit();
@@ -278,24 +283,6 @@ public class HomeActivity extends ActionBarActivity {
                 Log.d("onclick", "drawer Clicked");
             }
 
-        }
-    }
-
-    public class LoginTask extends AsyncTask{
-
-        @Override
-        protected Object doInBackground(Object[] params) {
-            return null;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected void onPostExecute(Object o) {
-            super.onPostExecute(o);
         }
     }
 }

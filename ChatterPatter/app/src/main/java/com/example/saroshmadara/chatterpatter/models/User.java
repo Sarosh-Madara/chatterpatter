@@ -9,7 +9,7 @@ public class User {
     private String lastName;
     private String lastLogin;
     private String status;
-    private String token; //245 digits firebase access token string, this will also be used as our token,
+//    private String token; //245 digits firebase access token string, this will also be used as our token,
     private String userID;
 
     public String getPassword() {
@@ -34,13 +34,22 @@ public class User {
         this.password = password;
     }
 
+    public User(String email, String userID, String firstName, String lastName,String password,String lastLogin) {
+        this.email = email;
+        this.userID = userID;
+        this.lastLogin = lastLogin;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+    }
+
     public User(String email, String firstName, String lastName, String lastLogin, String status, String token, String userID) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.lastLogin = lastLogin;
         this.status = status;
-        this.token = token;
+//        this.token = token;
         this.userID = userID;
     }
 
@@ -83,15 +92,15 @@ public class User {
     public void setStatus(String status) {
         this.status = status;
     }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
+//
+//    public String getToken() {
+//        return token;
+//    }
+//
+//    public void setToken(String token) {
+//        this.token = token;
+//    }
+//
     public String getUserID() {
         return userID;
     }
@@ -100,4 +109,8 @@ public class User {
         this.userID = userID;
     }
 
+    @Override
+    public String toString() {
+        return email+" "+firstName+" "+lastName+" "+userID+" "+lastLogin+" "+status;
+    }
 }

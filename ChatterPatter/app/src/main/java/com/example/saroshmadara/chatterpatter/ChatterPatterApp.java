@@ -11,6 +11,8 @@ import com.firebase.client.Firebase;
  * Created by Sarosh Madara on 02-10-2015.
  */
 public class ChatterPatterApp extends Application {
+    public static String appuser = "appuser";
+
     @Override
     public void onCreate() {
         super.onCreate();

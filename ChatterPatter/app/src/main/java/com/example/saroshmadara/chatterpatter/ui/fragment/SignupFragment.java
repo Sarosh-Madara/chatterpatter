@@ -2,6 +2,7 @@ package com.example.saroshmadara.chatterpatter.ui.fragment;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,9 +15,9 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.example.saroshmadara.chatterpatter.ChatterPatterApp;
 import com.example.saroshmadara.chatterpatter.MainActivity;
 import com.example.saroshmadara.chatterpatter.R;
 import com.example.saroshmadara.chatterpatter.firebase.FirebaseHandler;
@@ -24,6 +25,7 @@ import com.example.saroshmadara.chatterpatter.models.User;
 import com.example.saroshmadara.chatterpatter.services.core.AuthenticationService;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.google.gson.Gson;
 
 import java.util.Calendar;
 import java.util.Map;
@@ -142,13 +144,19 @@ public class SignupFragment extends Fragment {
                     if(password.getText().toString().equals(confirmPassword.getText().toString())){
                         user.setFirstName(firstname.getText().toString());
                         user.setLastName(lastname.getText().toString());
-                        final String userkey = user.getEmail().replace(".",">");
+                        final String userkey = user.getEmail().replace(".", ">");
+                        user.setUserID(userkey);
+                        user.setLastLogin(String.valueOf(System.currentTimeMillis()));
+                        user.setStatus("offline");
+
                         FirebaseHandler.getInstance().getFirebaseRoot().createUser(user.getEmail(), password.getText().toString(), new Firebase.ValueResultHandler<Map<String, Object>>() {
                             @Override
                             public void onSuccess(Map<String, Object> result) {
                                 Toast.makeText(getActivity(), "Successfully created user account with uid: " + result.get("uid"), Toast.LENGTH_SHORT).show();
-//                                AuthenticationService.signUp(userkey,user);
+                                AuthenticationService.signUp(userkey, user);
                                 ((MainActivity)mListener).onBackPressed();
+                                saveToInternal(user);
+                                ChatterPatterApp.setApplicationUser(user);
                             }
 
                             @Override
@@ -165,6 +173,17 @@ public class SignupFragment extends Fragment {
 
             }
         });
+    }
+
+    private void saveToInternal(User user) {
+
+        SharedPreferences mPrefs = MainActivity.getChatPrefs();
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(user);
+        prefsEditor.putString(ChatterPatterApp.appuser,json);
+        prefsEditor.apply();
+
     }
 
     private void changeView() {

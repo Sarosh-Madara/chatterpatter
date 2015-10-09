@@ -39,7 +39,7 @@ public class AuthenticationService {
              @Override
              public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                  Log.d("on child added test","getKEY: "+dataSnapshot.getKey()+" getValue: "+dataSnapshot.getValue()+" getChildrenCount: "+dataSnapshot.getChildrenCount() +" getChildren: "+dataSnapshot.getChildren() );
-                 obj.put(dataSnapshot.getKey(),dataSnapshot.getValue(User.class));
+//                 obj.put(dataSnapshot.getKey(),dataSnapshot.getValue(User.class));
              }
 
              @Override

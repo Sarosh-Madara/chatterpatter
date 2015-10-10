@@ -53,7 +53,7 @@ public class HomeActivity extends ActionBarActivity {
 //                GravityCompat.START);
 
         // Add Drawer Item to dataList
-//        if(ChatterPatterApp.getApplicationUser() != null)
+        if(ChatterPatterApp.getApplicationUser() != null)
         dataList.add(new DrawerItem(ChatterPatterApp.getApplicationUser()));
 
         dataList.add(new DrawerItem("Connections"));
@@ -64,10 +64,7 @@ public class HomeActivity extends ActionBarActivity {
 
         dataList.add(new DrawerItem("Main Options"));
         dataList.add(new DrawerItem("Tasks", R.drawable.todo_icon));
-        dataList.add(new DrawerItem("Cloud", R.drawable.ic_action_message));
-        dataList.add(new DrawerItem("Camara", R.drawable.ic_action_camera));
-        dataList.add(new DrawerItem("Video", R.drawable.ic_action_following));
-        dataList.add(new DrawerItem("Groups", R.drawable.groupchat));
+
         dataList.add(new DrawerItem("Import & Export",R.drawable.ic_action_help));
 
         dataList.add(new DrawerItem("Other Options"));
@@ -187,34 +184,6 @@ public class HomeActivity extends ActionBarActivity {
                         .getImgResID());
                 break;
             case 11:
-                fragment = new HomeFragment();
-                args.putString(HomeFragment.ITEM_NAME, dataList.get(possition)
-                        .getItemName());
-                args.putInt(HomeFragment.IMAGE_RESOURCE_ID, dataList.get(possition)
-                        .getImgResID());
-                break;
-            case 12:
-                fragment = new HomeFragment();
-                args.putString(HomeFragment.ITEM_NAME, dataList.get(possition)
-                        .getItemName());
-                args.putInt(HomeFragment.IMAGE_RESOURCE_ID, dataList.get(possition)
-                        .getImgResID());
-                break;
-            case 14:
-                fragment = new HomeFragment();
-                args.putString(HomeFragment.ITEM_NAME, dataList.get(possition)
-                        .getItemName());
-                args.putInt(HomeFragment.IMAGE_RESOURCE_ID, dataList.get(possition)
-                        .getImgResID());
-                break;
-            case 15:
-                fragment = new HomeFragment();
-                args.putString(HomeFragment.ITEM_NAME, dataList.get(possition)
-                        .getItemName());
-                args.putInt(HomeFragment.IMAGE_RESOURCE_ID, dataList.get(possition)
-                        .getImgResID());
-                break;
-            case 16:
                 fragment = new HomeFragment();
                 args.putString(HomeFragment.ITEM_NAME, dataList.get(possition)
                         .getItemName());

@@ -26,20 +26,22 @@ public class AuthenticationService {
     static int i = 0;
     static int no_of_users = 0;
 
-    public static void signUp(String id,User user){
+    public static void signUp(final String id,User user){
 
-         Firebase  newUserRef = FirebaseHandler.getInstance().getUsersRef();
+         final Firebase  newUserRef = FirebaseHandler.getInstance().getUsersRef();
          obj = new HashMap();
          obj.put(id,user);
         Log.d("authSer.signUp()","called");
-        newUserRef.setValue(obj);
-
+//        newUserRef.setValue(obj);
 
          newUserRef.addChildEventListener(new ChildEventListener() {
              @Override
              public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                  Log.d("on child added test","getKEY: "+dataSnapshot.getKey()+" getValue: "+dataSnapshot.getValue()+" getChildrenCount: "+dataSnapshot.getChildrenCount() +" getChildren: "+dataSnapshot.getChildren() );
-//                 obj.put(dataSnapshot.getKey(),dataSnapshot.getValue(User.class));
+                 obj.put(dataSnapshot.getKey(), dataSnapshot.getValue(User.class));
+
+                 newUserRef.setValue(obj);
+
              }
 
              @Override

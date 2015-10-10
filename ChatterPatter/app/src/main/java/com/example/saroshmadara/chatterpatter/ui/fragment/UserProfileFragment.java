@@ -53,7 +53,4 @@ public class UserProfileFragment extends Fragment {
         followers = (TextView) view.findViewById(R.id.userFollowersTv);
         following = (TextView) view.findViewById(R.id.userFollowingTv);
     }
-
-
-
 }

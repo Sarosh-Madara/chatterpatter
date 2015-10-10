@@ -79,18 +79,23 @@ public class CreateTodoFragment extends Fragment {
                     title.setError(null, ContextCompat.getDrawable(getActivity(),R.drawable.ic_action_about));
                     tag.setError(null,ContextCompat.getDrawable(getActivity(),R.drawable.ic_action_about));
                 }
-//                else if(fields[0] && fields[1] && fields[2]) {
-//                    obj.setTitle(title.getText().toString());
-//                    obj.setTag(tag.getText().toString());
-//                    obj.setDesc(desc.getText().toString());
-//                }else if(fields[0] && fields[1]){
-//                    obj.setTitle(title.getText().toString());
-//                    obj.setTag(tag.getText().toString());
-//                    obj.setDesc("null");
-//                }
-//
-//
-//                TodoService.writeTodo(obj.getTitle().toString() + "~" + System.currentTimeMillis(), obj);
+
+                else if(fields[0] && fields[1] && fields[2]) {
+                    obj.setTitle(title.getText().toString());
+                    obj.setTag(tag.getText().toString());
+                    obj.setDesc(desc.getText().toString());
+                }else if(fields[0] && fields[1]){
+                    obj.setTitle(title.getText().toString());
+                    obj.setTag(tag.getText().toString());
+                    obj.setDesc("null");
+                }else if(fields[0] && fields[1] == false && fields[2] == false){
+                    obj.setTitle(title.getText().toString());
+                    obj.setTag("null");
+                    obj.setDesc("null");
+                }
+
+
+                TodoService.writeTodo(obj.getTitle().toString() + "~" + System.currentTimeMillis(), obj);
             }
         });
 

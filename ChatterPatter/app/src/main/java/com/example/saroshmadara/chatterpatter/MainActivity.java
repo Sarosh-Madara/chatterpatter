@@ -39,6 +39,20 @@ public class MainActivity extends ActionBarActivity implements LoginFragment.OnF
         Firebase.setAndroidContext(this);
         setContentView(R.layout.activity_main);
 
+       hasUser();
+
+        if(savedInstanceState == null){
+            if(hasUser) {
+                Intent i = new Intent(this, HomeActivity.class);
+                startActivity(i);
+            }else{
+                changeFragment(0);
+            }
+        }
+
+    }
+
+    private void hasUser() {
         chatPrefs = getSharedPreferences(CHATPREFERENCE,Context.MODE_PRIVATE);
         SharedPreferences.Editor chatEdit = chatPrefs.edit();
         if(chatEdit == null){
@@ -50,7 +64,6 @@ public class MainActivity extends ActionBarActivity implements LoginFragment.OnF
             String json = chatPrefs.getString(ChatterPatterApp.appuser, "");
 
             if (json == null || json.equals("")) {
-                Toast.makeText(this,"Value of Json: "+json,Toast.LENGTH_SHORT).show();
             }else{
                 User user = gson.fromJson(json, User.class);
                 ChatterPatterApp.setApplicationUser(user);
@@ -58,16 +71,6 @@ public class MainActivity extends ActionBarActivity implements LoginFragment.OnF
 
             }
         }
-
-        if(savedInstanceState == null){
-            if(hasUser) {
-                Intent i = new Intent(this, HomeActivity.class);
-                startActivity(i);
-            }else{
-                changeFragment(0);
-            }
-        }
-
     }
 
     public void changeFragment(int index){

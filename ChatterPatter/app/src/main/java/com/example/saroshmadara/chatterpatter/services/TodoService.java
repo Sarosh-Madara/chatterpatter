@@ -2,6 +2,7 @@ package com.example.saroshmadara.chatterpatter.services;
 
 import android.util.Log;
 
+import com.example.saroshmadara.chatterpatter.ChatterPatterApp;
 import com.example.saroshmadara.chatterpatter.firebase.FirebaseHandler;
 import com.example.saroshmadara.chatterpatter.models.Todo;
 import com.example.saroshmadara.chatterpatter.ui.fragment.TodoFragment;
@@ -17,19 +18,20 @@ import com.firebase.client.ValueEventListener;
 public class TodoService {
 
     static Firebase todoRef = FirebaseHandler.getInstance().getUser_todos();
+
     public static void writeTodo(String key,Todo obj){
-        todoRef.child(key).setValue(obj);
+        todoRef.child(ChatterPatterApp.getApplicationUser().getUserID()).child(key).setValue(obj);
     }
 
     public static void fetchTodo(final TodoFragment.TodoListAdapter todoListAdapter){
 
-        todoRef.addChildEventListener(new ChildEventListener() {
+        todoRef.child(ChatterPatterApp.getApplicationUser().getUserID()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Todo obj = dataSnapshot.getValue(Todo.class);
-                Log.d("obj from firebase: ",obj.getDesc()+obj.getTag()+obj.getTitle());
+                Log.d("obj from firebase: ", obj.getDesc() + obj.getTag() + obj.getTitle());
                 todoListAdapter.add(obj);
-                Log.d("key is:"+dataSnapshot.getKey(),"value is: "+dataSnapshot.getValue());
+                Log.d("key is:" + dataSnapshot.getKey(), "value is: " + dataSnapshot.getValue());
             }
 
             @Override

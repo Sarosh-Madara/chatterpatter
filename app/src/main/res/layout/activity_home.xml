@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.saroshmadara.chatterpatter.ui.activity.HomeActivity"
+    >
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?android:attr/actionBarSize"
+        />
+    <FrameLayout
+        android:id="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+    <ListView
+
+        android:layout_gravity="start"
+        android:divider="@android:color/transparent"
+        android:choiceMode="singleChoice"
+        android:id="@+id/left_drawer"
+        android:background="#b85900"
+        android:dividerHeight="0dp"
+        android:layout_width="240dp"
+        android:layout_height="match_parent">
+
+    </ListView>
+
+</android.support.v4.widget.DrawerLayout>
+
